@@ -29,6 +29,13 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*jar-with-dependencies.jar staging
+        
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Container image
+      run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
+    - name: Publish Docker image
+      run: docker push ${{ secrets.DOCKER_REPO }} 
       
     - name: Uploading Artifacts
       uses: actions/upload-artifact@v2
