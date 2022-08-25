@@ -29,7 +29,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Uploading Artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
-        name: Package
-        path: staging
+         name: Package
+         path: staging
