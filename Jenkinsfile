@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Build Docker Image') {  
             steps{                     
-	              sh 'sudo docker build -t <dockerhubusername>/<dockerhubreponame>:$BUILD_NUMBER .'     
+	              sh 'sudo docker build '     
 	              echo 'Build Image Completed'                
             }           
         }
