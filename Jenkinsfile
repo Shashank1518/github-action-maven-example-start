@@ -47,8 +47,8 @@ pipeline {
                   echo 'Push Image Completed'       
             }           
         } 
-    	 stage {
-       	     steps {  
+    	 stage('Logout to Docker Hub') {
+       	     steps{  
           	    sh 'docker logout'           
          	  }      
       	    }
