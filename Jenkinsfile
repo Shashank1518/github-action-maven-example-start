@@ -31,26 +31,26 @@ pipeline {
         }
         stage('Build Docker Image') {  
             steps{                     
-	              sh 'sudo docker build '     
+	              sh 'sudo docker build -t shashank1518/github-action-maven-example-start .'     
 	              echo 'Build Image Completed'                
             }           
         }
         stage('Login to Docker Hub') {         
             steps{                            
-    	          sh 'echo $dockerhubcredentials | sudo docker login -u $dockerhubcredentials --password-stdin'                 
+    	          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                 
     	          echo 'Login Completed'                
             }           
         }               
         stage('Push Image to Docker Hub') {         
             steps{                            
-    	          sh 'sudo docker push dockerhubusername/dockerhubreponame:$BUILD_NUMBER'                
+    	          sh 'sudo docker push shashank1518/github-action-maven-example-start'                
                   echo 'Push Image Completed'       
             }           
         } 
-    	 stage('Logout to Docker Hub') {
-       	     steps{  
-          	    sh 'docker logout'           
-         	  }      
-      	    }
-      }
+    post{
+       always {  
+           sh 'docker logout'           
+           }      
+        }  
+    }
 }
