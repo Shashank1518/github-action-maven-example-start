@@ -29,6 +29,7 @@ pipeline {
                 sh 'make publish'
             }
         }
+    stages {
         stage('Build Docker Image') {  
             steps{                     
 	              sh 'sudo docker build -t <dockerhubusername>/<dockerhubreponame>:$BUILD_NUMBER .'     
@@ -46,7 +47,8 @@ pipeline {
     	          sh 'sudo docker push dockerhubusername/dockerhubreponame:$BUILD_NUMBER'                
                 echo 'Push Image Completed'       
             }           
-        }      
+        } 
+    }
     post{
        always {  
            sh 'docker logout'           
